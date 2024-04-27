@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!DOCTYPE module PUBLIC "-//Checkstyle//DTD Checkstyle Configuration 1.3//EN"
+        "https://checkstyle.org/dtds/configuration_1_3.dtd">
+
+<module name="Checker">
+    <property name="charset" value="UTF-8"/>
+
+    <module name="TreeWalker">
+        <!-- Comprueba que el código sigue la guía de estilo Sun o Google -->
+        <module name="TypeParameterName"/>
+        <module name="AvoidStarImport"/>
+        <module name="RedundantImport"/>
+        <module name="UnusedImports"/>
+        <module name="LineLength">
+            <!-- Establece el máximo de longitud de línea permitida -->
+            <property name="max" value="120"/>
+        </module>
+        <module name="MethodLength">
+            <!-- Limita el número de líneas en métodos a 150 -->
+            <property name="max" value="150"/>
+        </module>
+        <module name="ParameterNumber">
+            <!-- Limita el número de parámetros permitidos -->
+            <property name="max" value="7"/>
+        </module>
+        <module name="MethodName">
+            <property name="format" value="^[a-z][a-zA-Z0-9]+$"/>
+        </module>
+        <module name="ParameterName">
+            <property name="format" value="^[a-z][a-zA-Z0-9]+$"/>
+        </module>
+        <module name="LocalVariableName">
+            <property name="format" value="^[a-z][a-zA-Z0-9]+$"/>
+        </module>
+        <module name="ClassTypeParameterName">
+            <property name="format" value="(^[A-Z][a-zA-Z0-9]+$)"/>
+        </module>
+        <module name="NoWhitespaceBefore">
+            <!-- Evita espacios en blanco antes de un token -->
+            <property name="tokens" value="COMMA, SEMI, POST_INC, POST_DEC, DOT"/>
+        </module>
+        <module name="WhitespaceAround">
+            <!-- Requiere espacio alrededor de tokens específicos -->
+            <property name="tokens" value="ASSIGN, BAND, BAND_ASSIGN, BOR, BOR_ASSIGN, BSR_ASSIGN, BXOR, BXOR_ASSIGN, COLON, DIV, DIV_ASSIGN, EQUAL, GE, GT, LAND, LE, LITERAL_ASSERT, LITERAL_CATCH, LITERAL_ELSE, LITERAL_FINALLY, LITERAL_FOR, LITERAL_IF, LITERAL_RETURN, LITERAL_SYNCHRONIZED, LITERAL_TRY, LITERAL_WHILE, LOR, LT, MINUS, MINUS_ASSIGN, MOD, MOD_ASSIGN, NOT_EQUAL, PLUS, PLUS_ASSIGN, QUESTION, SL, SLIST, SL_ASSIGN, SR_ASSIGN, STAR, STAR_ASSIGN, TYPE_EXTENSION_AND"/>
+        </module>
+        <module name="NeedBraces">
+            <!-- Exige el uso de llaves en estructuras de control -->
+            <property name="tokens" value="LITERAL_DO, LITERAL_ELSE, LITERAL_FOR, LITERAL_IF, LITERAL_WHILE"/>
+            <property name="allowSingleLineStatement" value="true"/>
+        </module>
+    </module>
+</module>
