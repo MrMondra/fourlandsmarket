@@ -2,7 +2,7 @@
 FROM openjdk:17
 
 # Copiar el JAR construido desde el contexto de construcción al contenedor
-COPY target/myapplication.jar app.jar
+COPY target/fourlands.jar app.jar
 
 # Comando para ejecutar la aplicación
 ENTRYPOINT ["java","-jar","/app.jar"]
