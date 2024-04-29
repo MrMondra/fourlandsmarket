@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class FuckController {
     @GetMapping("/yeah")
     public String hpYeah() {
+
+        int a = 1 +2;
         return "SI SE PODIA BENDITO DIOS";
     }
 }
