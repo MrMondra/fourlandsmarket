@@ -10,7 +10,7 @@ on:
     branches:
       - develop
       - master
-# Defines the jobs to be executed
+# Defines the jobs to be executeds
 jobs:
 
   previous-test:
