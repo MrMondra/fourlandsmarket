@@ -12,15 +12,15 @@ on:
       - master
 # Defines the jobs to be executed
 jobs:
-  build:
-    runs-on: ubuntu-latest  # Defines the type of virtual machine that will run the job
 
-    steps:
+  previous-test:
+    runs-on: ubuntu-latest  # Defines the type of virtual machine that will run the job
+    steps: 
       # Cancel previous executions of workflows still in progress for the same branch
       - name: Cancel Previous Runs
         uses: styfle/cancel-workflow-action
         with:
-          acces_token: ${{github.token}}
+          acces_token: ${{ github.token }}
       # Checks out the code in the action's virtual machine
       - uses: actions/checkout@v2
       # Configure Java 17 for use in the workflow
@@ -36,6 +36,11 @@ jobs:
       - name: Run Checkstyle
         run: ./gradlew checkstyleMain checkstyleTest
       # Compile the project using Gradle
+
+  build-general:    
+    runs-on: ubuntu-latest  # Defines the type of virtual machine that will run the job    
+    needs: previous-test
+    steps:
       - name: Build with Gradle
         run: ./gradlew build --info
       # Configure Docker Buildx for building Docker images
@@ -47,21 +52,29 @@ jobs:
         with:
           username: ${{ secrets.FOURLANDS_DOCKER_USER }}
           password: ${{ secrets.FOURLANDS_DOCKER_PASS }}
+  build-for-master:  
+    runs-on: ubuntu-latest  # Defines the type of virtual machine that will run the job    
+    needs: build-general
+    if: startsWith(github.ref, 'refs/heads/master')
+    steps:
       # Build and upload a Docker image to the master branch
-      - name: Build and push (master)
-        if: github.ref == 'refs/heads/master'
+      - name: Build and push (master)        
         uses: docker/build-push-action@v2
         with:
           context: .
           file: ./Dockerfile
           push: true
           tags: fourlandsdev/fourlandsprod:latest
-      # Build and upload a Docker image to the develop branch
-      - name: Build and push (develop)
-        if: github.ref == 'refs/heads/develop'
+  build-for-develop:
+    runs-on: ubuntu-latest  # Defines the type of virtual machine that will run the job    
+    needs: build-general
+    if: startsWith(github.ref, 'refs/heads/develop')
+    steps:
+      # Build and upload a Docker image to the master branch
+      - name: Build and push (develop)        
         uses: docker/build-push-action@v2
         with:
           context: .
           file: ./Dockerfile
           push: true
-          tags: fourlandsdev/fourlandsdev:dev
+          tags: fourlandsdev/fourlandsdev:latest
