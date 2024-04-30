@@ -77,4 +77,4 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: fourlandsdev/fourlandsdev:latest
+          tags: fourlandsdev/fourlandsdev:dev
