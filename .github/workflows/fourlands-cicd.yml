@@ -32,7 +32,7 @@ jobs:
       # Grant execute permissions for the gradlew script
       - name: Grant execute permission for gradlew
         run: chmod +x ./gradlew
-      # Run Checkstyle to ensure that the code complies with style standards
+      # Run Checkstyle to ensure that the code complies with style standard
       - name: Run Checkstyle
         run: ./gradlew checkstyleMain checkstyleTest
       # Compile the project using Gradle
