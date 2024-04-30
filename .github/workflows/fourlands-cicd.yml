@@ -1,4 +1,3 @@
-# Workflow name and description
 name: fourlands CI/CD
 # Defines the events that trigger the workflow
 on:
