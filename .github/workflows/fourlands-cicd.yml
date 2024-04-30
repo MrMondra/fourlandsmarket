@@ -17,10 +17,10 @@ jobs:
     runs-on: ubuntu-latest  # Defines the type of virtual machine that will run the job
     steps: 
       # Cancel previous executions of workflows still in progress for the same branch
-      #- name: Cancel Previous Runs
-      #  uses: styfle/cancel-workflow-action@0.9.1
-      #  with:
-      #    acces_token: ${{ github.token }}
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.9.1
+        with:
+          acces_token: ${{ github.token }}
       # Checks out the code in the action's virtual machine
       - uses: actions/checkout@v2
       # Configure Java 17 for use in the workflow
