@@ -65,3 +65,4 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: fourlands:dev
+      #Some test here
