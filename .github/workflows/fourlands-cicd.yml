@@ -41,6 +41,9 @@ jobs:
     runs-on: ubuntu-latest  # Defines the type of virtual machine that will run the job    
     needs: previous-test
     steps:
+      # Grant execute permissions for the gradlew script
+      - name: Grant execute permission for gradlew
+        run: chmod +x ./gradlew
       - name: Build with Gradle
         run: ./gradlew build --info
       # Configure Docker Buildx for building Docker images
