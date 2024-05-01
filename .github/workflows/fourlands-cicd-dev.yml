@@ -1,26 +1,47 @@
-#Prueba 1
+# Workflow name and description
 name: fourlands CI/CD
 # Defines the events that trigger the workflow
 on:
   push:
     branches:
-      - master
       - develop
   pull_request:
     branches:
-      - develop
-      - master
-# Defines the jobs to be executed
+      - develop      
+# Defines the jobs to be executeds
 jobs:
-  build:
+  
+  previous-test:
     runs-on: ubuntu-latest  # Defines the type of virtual machine that will run the job
-
-    steps:
+    steps: 
       # Cancel previous executions of workflows still in progress for the same branch
       - name: Cancel Previous Runs
-        uses: styfle/cancel-workflow-action
+        uses: styfle/cancel-workflow-action@0.9.1
         with:
-          acces_token: ${{github.token}}
+          acces_token: ${{ github.token }}
+
+      # Checks out the code in the action's virtual machine
+      - uses: actions/checkout@v2
+
+      # Configure Java 17 for use in the workflow
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      # Grant execute permissions for the gradlew script
+      - name: Grant execute permission for gradlew
+        run: chmod +x ./gradlew
+
+      # Run Checkstyle to ensure that the code complies with style standard
+      - name: Run Checkstyle
+        run: ./gradlew checkstyleMain checkstyleTest      
+
+  build-and-deploy-docker:    
+    runs-on: ubuntu-latest  # Defines the type of virtual machine that will run the job    
+    needs: previous-test
+    steps:
       # Checks out the code in the action's virtual machine
       - uses: actions/checkout@v2
       # Configure Java 17 for use in the workflow
@@ -29,39 +50,31 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
+
       # Grant execute permissions for the gradlew script
       - name: Grant execute permission for gradlew
         run: chmod +x ./gradlew
-      # Run Checkstyle to ensure that the code complies with style standards
-      - name: Run Checkstyle
-        run: ./gradlew checkstyleMain checkstyleTest
+
       # Compile the project using Gradle
       - name: Build with Gradle
         run: ./gradlew build --info
+
       # Configure Docker Buildx for building Docker images
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
+
       # Log in to DockerHub to allow image uploads
       - name: Login to DockerHub
         uses: docker/login-action@v1
         with:
           username: ${{ secrets.FOURLANDS_DOCKER_USER }}
           password: ${{ secrets.FOURLANDS_DOCKER_PASS }}
+
       # Build and upload a Docker image to the master branch
-      - name: Build and push (master)
-        if: github.ref == 'refs/heads/master'
+      - name: Build and push (develop)        
         uses: docker/build-push-action@v2
         with:
           context: .
           file: ./Dockerfile
           push: true
-          tags: fourlands:latest
-      # Build and upload a Docker image to the develop branch
-      - name: Build and push (develop)
-        if: github.ref == 'refs/heads/develop'
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: ./Dockerfile
-          push: true
-          tags: fourlands:dev
+          tags: fourlandsdev/fourlandsdev:dev
