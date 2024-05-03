@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Table(name = "user_session")
 @Getter
 @Setter
-public class Session {
+public class SessionEntity {
     @Id
     @Column(name = "id_session")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,7 +18,7 @@ public class Session {
 
     @ManyToOne
     @JoinColumn(name = "id_user", insertable = false, updatable = false)
-    private User user;
+    private UserEntity user;
 
     @Column(name = "start_date")
     private LocalDateTime dateStart;

@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Table(name = "orders")
 @Getter
 @Setter
-public class Order {
+public class OrderEntity {
     @Id
     @Column(name = "id_order")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,15 +19,15 @@ public class Order {
 
     @ManyToOne
     @JoinColumn(name = "id_order", insertable = false, updatable = false)
-    private OrderDetail orderDetail;
+    private OrderDetailEntity orderDetail;
 
     @ManyToOne
     @JoinColumn(name = "id_user", insertable = false, updatable = false)
-    private User user;
+    private UserEntity user;
 
     @ManyToOne
     @JoinColumn(name = "id_status", insertable = false, updatable = false)
-    private Status status;
+    private StatusEntity status;
 
     private LocalDateTime date;
 

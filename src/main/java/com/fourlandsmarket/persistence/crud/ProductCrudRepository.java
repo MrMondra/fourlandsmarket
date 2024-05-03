@@ -1,18 +1,19 @@
 package com.fourlandsmarket.persistence.crud;
 
-import com.fourlandsmarket.persistence.entity.Product;
+import com.fourlandsmarket.persistence.entity.ProductEntity;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
+//Easy CRUD Repository with QueryMethods
 @Repository
-public interface ProductCrudRepository extends CrudRepository<Product, Integer> {
+public interface ProductCrudRepository extends CrudRepository<ProductEntity, Integer> {
 
     //Get products by Id Category
-    List<Product> findByCategoryIdOrderByNameAsc(Integer idCategory);
+    List<ProductEntity> findByCategoryIdCategoryOrderByNameAsc(Integer idCategory);
 
-    Optional<List<Product>> findByStockLessThan();
+    Optional<List<ProductEntity>> findByStockLessThan(Integer cantidad);
 
 }

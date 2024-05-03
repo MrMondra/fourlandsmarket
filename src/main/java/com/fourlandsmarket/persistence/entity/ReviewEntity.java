@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Table(name = "reviews")
 @Getter
 @Setter
-public class Review {
+public class ReviewEntity {
     @Id
     @Column(name = "id_review")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,11 +18,11 @@ public class Review {
 
     @ManyToOne
     @JoinColumn(name = "id_product", insertable = false, updatable = false)
-    private Product product;
+    private ProductEntity product;
 
     @ManyToOne
     @JoinColumn(name = "id_user", insertable = false, updatable = false)
-    private User user;
+    private UserEntity user;
 
     private Integer rating;
 

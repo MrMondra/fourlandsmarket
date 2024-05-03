@@ -24,6 +24,10 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.projectlombok:lombok'
+    implementation 'org.mapstruct:mapstruct:1.5.5.Final'
+
+    //Map Struct
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
 
     // Testing dependencies
     testImplementation 'org.springframework.boot:spring-boot-starter-test'

@@ -8,17 +8,17 @@ import lombok.Setter;
 @Table(name = "")
 @Getter
 @Setter
-public class ProductPromotion {
+public class ProductPromotionEntity {
     @EmbeddedId
     private ProductPromotionPK id;
 
     @ManyToOne
     @MapsId("idProduct")
     @JoinColumn(name = "id_product", insertable = false, updatable = false)
-    private Product product;
+    private ProductEntity product;
 
     @ManyToOne
     @MapsId("idPromotion")
     @JoinColumn(name = "id_promotion", insertable = false, updatable = false)
-    private Promotion promotion;
+    private PromotionEntity promotion;
 }

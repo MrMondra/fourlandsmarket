@@ -11,17 +11,17 @@ import java.util.List;
 @Table(name = "order_details")
 @Getter
 @Setter
-public class OrderDetail {
+public class OrderDetailEntity {
     @Id
     @Column(name = "id_order_detail")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idOrderDetail;
 
     @OneToMany(mappedBy = "orderDetail")
-    private List<Product> products;
+    private List<ProductEntity> products;
 
     @OneToMany(mappedBy = "orderDetail")
-    private List<Order> orders;
+    private List<OrderEntity> orders;
 
     private Integer quantity;
     @Column(name = "unit_price")

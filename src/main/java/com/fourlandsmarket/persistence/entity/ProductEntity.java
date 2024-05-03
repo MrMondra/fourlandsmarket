@@ -10,7 +10,7 @@ import java.util.List;
 @Table(name = "products")
 @Getter
 @Setter
-public class Product {
+public class ProductEntity {
 
     @Id
     @Column(name = "id_product")
@@ -18,19 +18,19 @@ public class Product {
     private Integer idProduct;
     @ManyToOne
     @JoinColumn(name = "id_category", insertable = false, updatable = false)
-    private Category category;
+    private CategoryEntity category;
     @ManyToOne
     @JoinColumn(name = "id_product", insertable = false, updatable = false)
-    private OrderDetail orderDetail;
+    private OrderDetailEntity orderDetail;
     @ManyToOne
     @JoinColumn(name = "id_product", insertable = false, updatable = false)
-    private Review review;
+    private ReviewEntity review;
 
     @OneToMany(mappedBy = "product")
-    private List<Review> reviews;
+    private List<ReviewEntity> reviews;
 
     @OneToMany(mappedBy = "product")
-    private List<ProductPromotion> productPromotions;
+    private List<ProductPromotionEntity> productPromotions;
 
     private String name;
     private String description;

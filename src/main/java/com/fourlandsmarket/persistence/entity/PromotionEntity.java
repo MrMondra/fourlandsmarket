@@ -11,16 +11,16 @@ import java.util.List;
 @Table(name = "promotions")
 @Getter
 @Setter
-public class Promotion {
+public class PromotionEntity {
     @Id
     @Column(name = "id_promotion")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idPromotion;
     @OneToMany(mappedBy = "promotion")
-    private List<CategoryPromotion> categoryPromotions;
+    private List<CategoryPromotionEntity> categoryPromotions;
 
     @OneToMany(mappedBy = "promotion")
-    private List<ProductPromotion> productPromotions;
+    private List<ProductPromotionEntity> productPromotions;
 
     private String description;
     private Double discount;

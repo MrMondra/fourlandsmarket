@@ -10,14 +10,14 @@ import java.util.List;
 @Table(name = "profiles")
 @Getter
 @Setter
-public class Profile {
+public class ProfileEntity {
     @Id
     @Column(name = "id_profile")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idProfile;
 
     @OneToMany(mappedBy = "profile")
-    private List<User> users;
+    private List<UserEntity> users;
 
     private String description;
     private String name;

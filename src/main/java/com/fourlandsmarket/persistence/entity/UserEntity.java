@@ -10,24 +10,24 @@ import java.util.List;
 @Table(name = "users")
 @Getter
 @Setter
-public class User {
+public class UserEntity {
     @Id
     @Column(name = "id_user")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idUser;
 
     @OneToMany(mappedBy = "user")
-    private List<Review> reviews;
+    private List<ReviewEntity> reviews;
 
     @OneToMany(mappedBy = "user")
-    private List<Order> orders;
+    private List<OrderEntity> orders;
 
     @OneToMany(mappedBy = "user")
-    private List<Session> sessions;
+    private List<SessionEntity> sessions;
 
     @ManyToOne
     @JoinColumn(name = "id_profile", insertable = false, updatable = false)
-    private Profile profile;
+    private ProfileEntity profile;
 
 
     private String name;

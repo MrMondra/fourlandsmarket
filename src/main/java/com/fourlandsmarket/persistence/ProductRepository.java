@@ -1,7 +1,7 @@
 package com.fourlandsmarket.persistence;
 
 import com.fourlandsmarket.persistence.crud.ProductCrudRepository;
-import com.fourlandsmarket.persistence.entity.Product;
+import com.fourlandsmarket.persistence.entity.ProductEntity;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -12,23 +12,23 @@ public class ProductRepository {
 
     private ProductCrudRepository productCrudRepository;
 
-    public List<Product> getAll() {
-        return (List<Product>) productCrudRepository.findAll();
+    public List<ProductEntity> getAll() {
+        return (List<ProductEntity>) productCrudRepository.findAll();
     }
 
-    public List<Product> getByCategory(int idCategory) {
-        return productCrudRepository.findByCategoryIdOrderByNameAsc(idCategory);
+    public List<ProductEntity> getByCategory(int idCategory) {
+        return productCrudRepository.findByCategoryIdCategoryOrderByNameAsc(idCategory);
     }
 
-    public Optional<List<Product>> getScarceProducts() {
-        return productCrudRepository.findByStockLessThan();
+    public Optional<List<ProductEntity>> getScarceProducts(Integer cantidad) {
+        return productCrudRepository.findByStockLessThan(cantidad);
     }
 
-    public Optional<Product> getProduct(Integer idProduct) {
+    public Optional<ProductEntity> getProduct(Integer idProduct) {
         return productCrudRepository.findById(idProduct);
     }
 
-    public Product save(Product product) {
+    public ProductEntity save(ProductEntity product) {
         return productCrudRepository.save(product);
     }
 

@@ -10,7 +10,7 @@ import java.util.List;
 @Table(name = "categories")
 @Getter
 @Setter
-public class Category {
+public class CategoryEntity {
 
     @Id
     @Column(name = "id_category")
@@ -18,10 +18,10 @@ public class Category {
     private Integer idCategory;
 
     @OneToMany(mappedBy = "category")
-    private List<Product> products;
+    private List<ProductEntity> products;
 
     @OneToMany(mappedBy = "category")
-    private List<CategoryPromotion> categoryPromotions;
+    private List<CategoryPromotionEntity> categoryPromotions;
 
 
     private String name;

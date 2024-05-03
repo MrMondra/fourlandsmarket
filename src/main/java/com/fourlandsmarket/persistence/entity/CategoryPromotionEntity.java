@@ -8,18 +8,18 @@ import lombok.Setter;
 @Table(name = "category_promotions")
 @Getter
 @Setter
-public class CategoryPromotion {
+public class CategoryPromotionEntity {
     @EmbeddedId
     private CategoryPromotionsPK id;
 
     @ManyToOne
     @MapsId("idCategory")
     @JoinColumn(name = "id_category", insertable = false, updatable = false)
-    private Category category;
+    private CategoryEntity category;
 
     @ManyToOne
     @MapsId("idPromotion")
     @JoinColumn(name = "id_promotion", insertable = false, updatable = false)
-    private Promotion promotion;
+    private PromotionEntity promotion;
 
 }
