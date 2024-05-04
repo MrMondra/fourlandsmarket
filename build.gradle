@@ -20,10 +20,20 @@ repositories {
 }
 
 dependencies {
+    // Spring Boot dependencies
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.projectlombok:lombok'
+    implementation 'org.mapstruct:mapstruct:1.5.5.Final'
+
+    //Map Struct
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
+
+    // Testing dependencies
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.mockito:mockito-core:4.2.0'  // Añade Mockito
+    testImplementation 'org.mockito:mockito-junit-jupiter:4.2.0' // Integración de Mockito con JUnit Jupiter
+
 
     runtimeOnly 'org.postgresql:postgresql'
 }

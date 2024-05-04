@@ -1,94 +1,136 @@
--- Create tables in PostgreSQL
 
--- User
-CREATE TABLE IF NOT EXISTS users (
-    user_id SERIAL PRIMARY KEY,
-    name VARCHAR(255),
-    email VARCHAR(255) UNIQUE,
-    password VARCHAR(255),
-    shipping_address TEXT,
-    is_admin BOOLEAN DEFAULT FALSE
-);
-
--- Product Category
 CREATE TABLE IF NOT EXISTS categories (
-    category_id SERIAL PRIMARY KEY,
-    name VARCHAR(255),
-    description TEXT,
-    image_url TEXT
+	id_category serial NOT NULL,
+	name varchar(255) NULL,
+	description text NULL,
+	image_url text NULL,
+	CONSTRAINT categories_pkey PRIMARY KEY (id_category)
 );
 
--- Product
-CREATE TABLE IF NOT EXISTS products (
-    product_id SERIAL PRIMARY KEY,
-    name VARCHAR(255),
-    description TEXT,
-    price NUMERIC(10, 2),
-    discount NUMERIC(5, 2) DEFAULT 0,
-    image_url TEXT,
-    category_id INT REFERENCES categories(category_id),
-    stock INT
+CREATE TABLE IF NOT EXISTS status (
+	id_status serial NOT NULL,
+	description varchar(250) NULL,
+	name varchar(100) NULL,
+	CONSTRAINT status_pk PRIMARY KEY (id_status)
 );
 
--- Order
-CREATE TABLE IF NOT EXISTS orders (
-    order_id SERIAL PRIMARY KEY,
-    user_id INT REFERENCES users(user_id),
-    date TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    status VARCHAR(50),
-    total NUMERIC(10, 2)
+CREATE TABLE IF NOT EXISTS profiles (
+	id_profile serial NOT NULL,
+	description varchar(100) NULL,
+	name varchar(250) NULL,
+	CONSTRAINT profiles_pk PRIMARY KEY (id_profile)
 );
 
--- Order Detail
-CREATE TABLE IF NOT EXISTS order_details (
-    order_detail_id SERIAL PRIMARY KEY,
-    order_id INT REFERENCES orders(order_id),
-    product_id INT REFERENCES products(product_id),
-    quantity INT,
-    unit_price NUMERIC(10, 2),
-    discount NUMERIC(5, 2) DEFAULT 0
-);
 
--- Promotion
 CREATE TABLE IF NOT EXISTS promotions (
-    promotion_id SERIAL PRIMARY KEY,
-    description TEXT,
-    discount NUMERIC(5, 2),
-    start_date DATE,
-    end_date DATE
+	id_promotion serial NOT NULL,
+	description text NULL,
+	discount numeric(5,2) NULL,
+	start_date date NULL,
+	end_date date NULL,
+	CONSTRAINT promotions_pkey PRIMARY KEY (id_promotion)
 );
 
--- Promoted Product
-CREATE TABLE IF NOT EXISTS product_promotions (
-    promotion_id INT REFERENCES promotions(promotion_id),
-    product_id INT REFERENCES products(product_id),
-    PRIMARY KEY (promotion_id, product_id)
+CREATE TABLE IF NOT EXISTS category_promotions (
+	id_promotion int4 NOT NULL,
+	id_category int4 NOT NULL,
+	CONSTRAINT category_promotions_pk PRIMARY KEY (id_promotion, id_category),
+	CONSTRAINT category_promotions_id_category_fk FOREIGN KEY (id_category) REFERENCES categories(id_category),
+	CONSTRAINT category_promotions_id_promotion_fk FOREIGN KEY (id_promotion) REFERENCES promotions(id_promotion)
 );
 
--- Review
-CREATE TABLE IF NOT EXISTS reviews (
-    review_id SERIAL PRIMARY KEY,
-    product_id INT REFERENCES products(product_id),
-    user_id INT REFERENCES users(user_id),
-    rating INT CHECK (rating >= 1 AND rating <= 5),
-    comment TEXT,
-    date TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP
+
+CREATE TABLE IF NOT EXISTS products (
+	id_product serial NOT NULL,
+	name varchar(255) NULL,
+	description text NULL,
+	price numeric(10,2) NULL,
+	image_url text NULL,
+	id_category int4 NULL,
+	stock int4 NULL,
+	CONSTRAINT products_pkey PRIMARY KEY (id_product),
+	CONSTRAINT products_id_category_fkey FOREIGN KEY (id_category) REFERENCES categories(id_category)
 );
 
--- Stock History
+
 CREATE TABLE IF NOT EXISTS stock_histories (
-    stock_history_id SERIAL PRIMARY KEY,
-    product_id INT REFERENCES products(product_id),
-    date TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    quantity_in INT,
-    quantity_out INT
+	id_stock_history serial NOT NULL,
+	id_product int4 NULL,
+	date timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+	quantity_in int4 NULL,
+	quantity_out int4 NULL,
+	CONSTRAINT stock_histories_pkey PRIMARY KEY (id_stock_history),
+	CONSTRAINT stock_histories_id_product_fkey FOREIGN KEY (id_product) REFERENCES products(id_product)
 );
 
--- User Session
+
+CREATE TABLE IF NOT EXISTS users (
+	id_user serial NOT NULL,
+	name varchar(255) NULL,
+	email varchar(255) NULL,
+	password varchar(255) NULL,
+	shipping_address text NULL,
+	id_profile int4 NULL,
+	CONSTRAINT users_email_key UNIQUE (email),
+	CONSTRAINT users_pkey PRIMARY KEY (id_user),
+	CONSTRAINT users_profiles_id_fk FOREIGN KEY (id_profile) REFERENCES profiles(id_profile)
+);
+
+
+CREATE TABLE IF NOT EXISTS orders (
+	id_order serial NOT NULL,
+	id_user int4 NULL,
+	date timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+	id_status int4 NULL,
+	total numeric(10,2) NULL,
+	CONSTRAINT orders_pkey PRIMARY KEY (id_order),
+	CONSTRAINT orders_id_user_fkey FOREIGN KEY (id_user) REFERENCES users(id_user),
+	CONSTRAINT orders_id_status_fkey FOREIGN KEY (id_status) REFERENCES status(id_status)
+);
+
+
+CREATE TABLE IF NOT EXISTS product_promotions (
+	id_promotion int4 NOT NULL,
+	id_product int4 NOT NULL,
+	CONSTRAINT product_promotions_pkey PRIMARY KEY (id_promotion, id_product),
+	CONSTRAINT product_promotions_id_product_fkey FOREIGN KEY (id_product) REFERENCES products(id_product),
+	CONSTRAINT product_promotions_id_promotion_fkey FOREIGN KEY (id_promotion) REFERENCES promotions(id_promotion)
+);
+
+
+CREATE TABLE IF NOT EXISTS reviews (
+	id_review serial NOT NULL,
+	id_product int4 NULL,
+	id_user int4 NULL,
+	rating int4 NULL,
+	comment text NULL,
+	date timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+	CONSTRAINT reviews_pkey PRIMARY KEY (id_review),
+	CONSTRAINT reviews_rating_check CHECK (((rating >= 1) AND (rating <= 5))),
+	CONSTRAINT reviews_id_product_fkey FOREIGN KEY (id_product) REFERENCES products(id_product),
+	CONSTRAINT reviews_id_user_fkey FOREIGN KEY (id_user) REFERENCES users(id_user)
+);
+
+
 CREATE TABLE IF NOT EXISTS user_session (
-    session_id SERIAL PRIMARY KEY,
-    user_id INT REFERENCES users(user_id),
-    start_date TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    end_date TIMESTAMP WITHOUT TIME ZONE,
-    session_token TEXT
+	id_session serial NOT NULL,
+	id_user int4 NULL,
+	start_date timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+	end_date timestamp NULL,
+	session_token text NULL,
+	CONSTRAINT user_session_pkey PRIMARY KEY (id_session),
+	CONSTRAINT user_id_session_user_fkey FOREIGN KEY (id_user) REFERENCES users(id_user)
+);
+
+
+CREATE TABLE IF NOT EXISTS order_details (
+	id_order_detail serial NOT NULL,
+	id_order int4 NULL,
+	id_product int4 NULL,
+	quantity int4 NULL,
+	unit_price numeric(10,2) NULL,
+	discount numeric(5,2) NULL DEFAULT 0,
+	CONSTRAINT order_details_pkey PRIMARY KEY (id_order_detail),
+	CONSTRAINT order_details_id_order_fkey FOREIGN KEY (id_order) REFERENCES orders(id_order),
+	CONSTRAINT order_details_id_product_fkey FOREIGN KEY (id_product) REFERENCES products(id_product)
 );
