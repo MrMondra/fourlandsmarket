@@ -16,7 +16,7 @@ public class StatusEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idStatus;
 
-    @OneToMany(mappedBy = "status")
+    @OneToMany(mappedBy = "statusEntity")
     private List<OrderEntity> orderEntities;
 
     private String description;
