@@ -17,7 +17,7 @@ public class StatusEntity {
     private Integer idStatus;
 
     @OneToMany(mappedBy = "status")
-    private List<OrderEntity> orders;
+    private List<OrderEntity> orderEntities;
 
     private String description;
     private String name;

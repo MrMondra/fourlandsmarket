@@ -16,18 +16,21 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idUser;
 
-    @OneToMany(mappedBy = "user")
-    private List<ReviewEntity> reviews;
+    //good
+    @OneToMany(mappedBy = "userEntity")
+    private List<ReviewEntity> reviewEntities;
 
-    @OneToMany(mappedBy = "user")
-    private List<OrderEntity> orders;
+    //good
+    @OneToMany(mappedBy = "userEntity")
+    private List<OrderEntity> orderEntities;
 
-    @OneToMany(mappedBy = "user")
-    private List<SessionEntity> sessions;
+    //good
+    @OneToMany(mappedBy = "userEntity")
+    private List<SessionEntity> sessionsEntities;
 
     @ManyToOne
     @JoinColumn(name = "id_profile", insertable = false, updatable = false)
-    private ProfileEntity profile;
+    private ProfileEntity profileEntity;
 
 
     private String name;

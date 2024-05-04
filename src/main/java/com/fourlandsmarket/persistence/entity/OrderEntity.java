@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Entity
@@ -17,17 +18,17 @@ public class OrderEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idOrder;
 
-    @ManyToOne
-    @JoinColumn(name = "id_order", insertable = false, updatable = false)
-    private OrderDetailEntity orderDetail;
+    @OneToMany(mappedBy = "orderEntity")
+    private List<OrderDetailEntity> orderDetailEntities;
 
+    //good
     @ManyToOne
     @JoinColumn(name = "id_user", insertable = false, updatable = false)
-    private UserEntity user;
+    private UserEntity userEntity;
 
     @ManyToOne
     @JoinColumn(name = "id_status", insertable = false, updatable = false)
-    private StatusEntity status;
+    private StatusEntity statusEntity;
 
     private LocalDateTime date;
 

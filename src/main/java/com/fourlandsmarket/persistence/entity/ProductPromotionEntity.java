@@ -12,13 +12,15 @@ public class ProductPromotionEntity {
     @EmbeddedId
     private ProductPromotionPK id;
 
+    //good
     @ManyToOne
     @MapsId("idProduct")
     @JoinColumn(name = "id_product", insertable = false, updatable = false)
-    private ProductEntity product;
+    private ProductEntity productEntity;
 
+    //good
     @ManyToOne
     @MapsId("idPromotion")
     @JoinColumn(name = "id_promotion", insertable = false, updatable = false)
-    private PromotionEntity promotion;
+    private PromotionEntity promotionEntity;
 }

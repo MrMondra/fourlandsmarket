@@ -16,21 +16,22 @@ public class ProductEntity {
     @Column(name = "id_product")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idProduct;
+
     @ManyToOne
     @JoinColumn(name = "id_category", insertable = false, updatable = false)
-    private CategoryEntity category;
-    @ManyToOne
-    @JoinColumn(name = "id_product", insertable = false, updatable = false)
-    private OrderDetailEntity orderDetail;
-    @ManyToOne
-    @JoinColumn(name = "id_product", insertable = false, updatable = false)
-    private ReviewEntity review;
+    private CategoryEntity categoryEntity;
 
-    @OneToMany(mappedBy = "product")
-    private List<ReviewEntity> reviews;
+    //good
+    @OneToMany(mappedBy = "productEntity")
+    List<OrderDetailEntity> orderDetailEntities;
 
-    @OneToMany(mappedBy = "product")
-    private List<ProductPromotionEntity> productPromotions;
+    //good
+    @OneToMany(mappedBy = "productEntity")
+    private List<ReviewEntity> reviewEntities;
+
+    //good
+    @OneToMany(mappedBy = "productEntity")
+    private List<ProductPromotionEntity> productPromotionEntities;
 
     private String name;
     private String description;

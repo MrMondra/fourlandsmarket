@@ -16,9 +16,10 @@ public class SessionEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idSession;
 
+    //good
     @ManyToOne
     @JoinColumn(name = "id_user", insertable = false, updatable = false)
-    private UserEntity user;
+    private UserEntity userEntity;
 
     @Column(name = "start_date")
     private LocalDateTime dateStart;

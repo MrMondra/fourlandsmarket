@@ -16,11 +16,11 @@ public class PromotionEntity {
     @Column(name = "id_promotion")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idPromotion;
-    @OneToMany(mappedBy = "promotion")
-    private List<CategoryPromotionEntity> categoryPromotions;
+    @OneToMany(mappedBy = "promotionEntity")
+    private List<CategoryPromotionEntity> categoryPromotionEntities;
 
-    @OneToMany(mappedBy = "promotion")
-    private List<ProductPromotionEntity> productPromotions;
+    @OneToMany(mappedBy = "promotionEntity")
+    private List<ProductPromotionEntity> productPromotionEntities;
 
     private String description;
     private Double discount;
