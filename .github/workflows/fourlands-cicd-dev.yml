@@ -80,7 +80,7 @@ jobs:
           tags: fourlandsdev/fourlandsdev:dev
   deploy-docker-image-to-render:
     runs-on: ubuntu-latest
-    needs: build-and-push-docker
+    needs: build-and-deploy-image-in-docker-hub
     steps:
       - name: Install Render CLI
         run: curl -fsSL https://render.com/static/cli/install.sh | sh
