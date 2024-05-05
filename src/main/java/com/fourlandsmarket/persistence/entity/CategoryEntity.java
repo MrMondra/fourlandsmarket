@@ -17,11 +17,13 @@ public class CategoryEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idCategory;
 
-    @OneToMany(mappedBy = "category")
-    private List<ProductEntity> products;
+    //good
+    @OneToMany(mappedBy = "categoryEntity")
+    private List<ProductEntity> productEntities;
 
-    @OneToMany(mappedBy = "category")
-    private List<CategoryPromotionEntity> categoryPromotions;
+    //good
+    @OneToMany(mappedBy = "categoryEntity")
+    private List<CategoryPromotionEntity> categoryPromotionEntities;
 
 
     private String name;

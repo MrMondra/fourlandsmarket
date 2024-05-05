@@ -16,8 +16,9 @@ public class ProfileEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idProfile;
 
-    @OneToMany(mappedBy = "profile")
-    private List<UserEntity> users;
+    //good
+    @OneToMany(mappedBy = "profileEntity")
+    private List<UserEntity> usersEntities;
 
     private String description;
     private String name;

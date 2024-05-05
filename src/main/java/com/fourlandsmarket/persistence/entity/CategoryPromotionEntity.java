@@ -15,11 +15,11 @@ public class CategoryPromotionEntity {
     @ManyToOne
     @MapsId("idCategory")
     @JoinColumn(name = "id_category", insertable = false, updatable = false)
-    private CategoryEntity category;
+    private CategoryEntity categoryEntity;
 
     @ManyToOne
     @MapsId("idPromotion")
     @JoinColumn(name = "id_promotion", insertable = false, updatable = false)
-    private PromotionEntity promotion;
+    private PromotionEntity promotionEntity;
 
 }

@@ -16,13 +16,15 @@ public class ReviewEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idReview;
 
+    //good
     @ManyToOne
     @JoinColumn(name = "id_product", insertable = false, updatable = false)
-    private ProductEntity product;
+    private ProductEntity productEntity;
 
+    //good
     @ManyToOne
     @JoinColumn(name = "id_user", insertable = false, updatable = false)
-    private UserEntity user;
+    private UserEntity userEntity;
 
     private Integer rating;
 
