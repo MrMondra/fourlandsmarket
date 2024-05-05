@@ -85,4 +85,4 @@ jobs:
       - name: Install Render CLI
         run: curl -fsSL https://render.com/static/cli/install.sh | sh
       - name: Deploy to Render
-        run: render deploy --service ${{ secrets.YOUR_SERVICE_ID }} --token ${{ secrets.RENDER_API_KEY }}
+        run: render deploy --service ${{ secrets.RENDER_SERVICE_ID }} --token ${{ secrets.RENDER_API_KEY }}
