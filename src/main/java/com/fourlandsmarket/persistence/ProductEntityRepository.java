@@ -1,6 +1,6 @@
 package com.fourlandsmarket.persistence;
 
-import com.fourlandsmarket.domain.Product;
+import com.fourlandsmarket.domain.dto.Product;
 import com.fourlandsmarket.domain.repository.ProductRepository;
 import com.fourlandsmarket.persistence.Mapper.ProductMapper;
 import com.fourlandsmarket.persistence.crud.ProductCrudRepository;

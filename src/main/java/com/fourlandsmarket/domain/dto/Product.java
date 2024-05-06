@@ -1,4 +1,4 @@
-package com.fourlandsmarket.domain;
+package com.fourlandsmarket.domain.dto;
 
 import lombok.Getter;
 import lombok.Setter;

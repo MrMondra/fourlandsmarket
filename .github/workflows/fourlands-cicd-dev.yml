@@ -7,13 +7,13 @@ on:
       - develop
   pull_request:
     branches:
-      - develop      
+      - develop
 # Defines the jobs to be executeds
 jobs:
   
   previous-test:
     runs-on: ubuntu-latest  # Defines the type of virtual machine that will run the job
-    steps: 
+    steps:
       # Cancel previous executions of workflows still in progress for the same branch
       - name: Cancel Previous Runs
         uses: styfle/cancel-workflow-action@0.9.1
@@ -36,9 +36,9 @@ jobs:
 
       # Run Checkstyle to ensure that the code complies with style standard
       - name: Run Checkstyle
-        run: ./gradlew checkstyleMain checkstyleTest      
+        run: ./gradlew checkstyleMain checkstyleTest
 
-  build-and-deploy-docker:    
+  build-and-deploy-image-in-docker-hub:
     runs-on: ubuntu-latest  # Defines the type of virtual machine that will run the job    
     needs: previous-test
     steps:
@@ -71,10 +71,21 @@ jobs:
           password: ${{ secrets.FOURLANDS_DOCKER_PASS }}
 
       # Build and upload a Docker image to the master branch
-      - name: Build and push (develop)        
+      - name: Build and push (develop)
         uses: docker/build-push-action@v2
         with:
           context: .
           file: ./Dockerfile
           push: true
           tags: fourlandsdev/fourlandsdev:dev
+  deploy-docker-image-to-render:
+    runs-on: ubuntu-latest
+    needs: build-and-deploy-image-in-docker-hub
+    steps:
+      - name: Deploy to Render
+        uses: gh-actions-workflows/deploy-docker-render@v1.1
+        with:
+          deploy-hook: ${{ secrets.RENDER_DEPLOY_HOOK }}
+          image-url: fourlandsdev/fourlandsdev:dev
+          render-api-key: ${{ secrets.RENDER_API_KEY }}
+          wait-for-deployment: true

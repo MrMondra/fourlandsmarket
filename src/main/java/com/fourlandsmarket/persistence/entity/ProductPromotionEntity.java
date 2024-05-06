@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "")
+@Table(name = "product_promotions")
 @Getter
 @Setter
 public class ProductPromotionEntity {

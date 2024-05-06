@@ -26,6 +26,13 @@ dependencies {
     implementation 'org.projectlombok:lombok'
     implementation 'org.mapstruct:mapstruct:1.5.5.Final'
 
+    //Graphql
+    implementation 'com.graphql-java-kickstart:graphql-java-tools:13.1.1'
+    implementation 'com.graphql-java-kickstart:graphql-spring-boot-starter:15.1.0'
+    implementation 'com.graphql-java-kickstart:graphql-java-servlet:15.2.0'
+    implementation 'com.graphql-java-kickstart:graphiql-spring-boot-starter:11.1.0'
+
+
     //Map Struct with lombok
     annotationProcessor("org.projectlombok:lombok")
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
