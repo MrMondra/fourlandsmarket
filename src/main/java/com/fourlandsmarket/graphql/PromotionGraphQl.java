@@ -32,6 +32,4 @@ public class PromotionGraphQl implements GraphQLQueryResolver {
     public List<Product> getProductByCategory(Integer idCategory) {
         return productService.getByCategory(idCategory).orElse(Collections.emptyList());
     }
-
-    ;
 }
