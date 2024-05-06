@@ -24,26 +24,37 @@ INSERT INTO categories (name, description, image_url) VALUES('Mercado', 'Product
 INSERT INTO categories (name, description, image_url) VALUES('Tecnologia', 'Tecnologia y entretenimiento', 'https://shorturl.at/ghtu4');
 
 --INSERTS PRODUCTS
-INSERT INTO products (name, description, price, image_url, id_category, stock) VALUES('Smartphone Pro', 'High-end smartphone with advanced features', 899, 'https://shorturl.at/ghtu4', 1, 35);
-INSERT INTO products (name, description, price, image_url, id_category, stock) VALUES('Smartwatch Fit', 'Waterproof smartwatch with fitness tracking', 199, 'https://shorturl.at/ghtu4', 2, 20);
-INSERT INTO products (name, description, price, image_url, id_category, stock) VALUES('Bluetooth Headphones', 'Noise-cancelling headphones', 120, 'https://shorturl.at/ghtu4', 3, 15);
-INSERT INTO products (name, description, price, image_url, id_category, stock) VALUES('Electric Scooter', 'Portable electric scooter for urban commute', 250, 'https://shorturl.at/ghtu4', 4, 40);
-INSERT INTO products (name, description, price, image_url, id_category, stock) VALUES('4K Television 50"', 'Ultra HD Smart TV with high dynamic range', 400, 'https://shorturl.at/ghtu4', 5, 25);
+-- Tecnología
+INSERT INTO products (name, description, price, image_url, id_category, stock) VALUES('Smartphone Pro', 'High-end smartphone with advanced features', 899, 'https://shorturl.at/ghtu4', 6, 35);
 INSERT INTO products (name, description, price, image_url, id_category, stock) VALUES('Gaming Console', 'Next generation gaming console with VR capabilities', 499, 'https://shorturl.at/ghtu4', 6, 30);
-INSERT INTO products (name, description, price, image_url, id_category, stock) VALUES('Portable Charger', 'High capacity, fast charging portable power bank', 34, 'https://shorturl.at/ghtu4', 1, 50);
-INSERT INTO products (name, description, price, image_url, id_category, stock) VALUES('Wireless Mouse', 'Ergonomic wireless mouse with high precision', 24, 'https://shorturl.at/ghtu4', 2, 70);
-INSERT INTO products (name, description, price, image_url, id_category, stock) VALUES('Camping Tent', 'Waterproof tent for outdoor activities', 150, 'https://shorturl.at/ghtu4', 3, 10);
-INSERT INTO products (name, description, price, image_url, id_category, stock) VALUES('Action Camera', '4K action camera with waterproof case', 120, 'https://shorturl.at/ghtu4', 4, 15);
-INSERT INTO products (name, description, price, image_url, id_category, stock) VALUES('Espresso Machine', 'Compact espresso coffee machine', 85, 'https://shorturl.at/ghtu4', 5, 8);
+INSERT INTO products (name, description, price, image_url, id_category, stock) VALUES('E-Reader', 'Lightweight e-reader with e-ink display', 130, 'https://shorturl.at/ghtu4', 6, 33);
 INSERT INTO products (name, description, price, image_url, id_category, stock) VALUES('Electric Kettle', 'Fast boiling stainless steel kettle', 29, 'https://shorturl.at/ghtu4', 6, 22);
-INSERT INTO products (name, description, price, image_url, id_category, stock) VALUES('E-Reader', 'Lightweight e-reader with e-ink display', 130, 'https://shorturl.at/ghtu4', 1, 33);
-INSERT INTO products (name, description, price, image_url, id_category, stock) VALUES('Bluetooth Speaker', 'Portable speaker with 360-degree sound', 99, 'https://shorturl.at/ghtu4', 2, 40);
-INSERT INTO products (name, description, price, image_url, id_category, stock) VALUES('Smart Thermostat', 'Energy efficient smart thermostat', 200, 'https://shorturl.at/ghtu4', 3, 12);
-INSERT INTO products (name, description, price, image_url, id_category, stock) VALUES('Fitness Tracker', 'Advanced fitness tracker with GPS', 160, 'https://shorturl.at/ghtu4', 4, 28);
-INSERT INTO products (name, description, price, image_url, id_category, stock) VALUES('Robot Vacuum', 'Smart robot vacuum cleaner with app control', 299, 'https://shorturl.at/ghtu4', 5, 15);
 INSERT INTO products (name, description, price, image_url, id_category, stock) VALUES('Air Purifier', 'HEPA air purifier for allergy sufferers', 89, 'https://shorturl.at/ghtu4', 6, 18);
-INSERT INTO products (name, description, price, image_url, id_category, stock) VALUES('Digital Camera', 'Compact digital camera with 20 MP', 250, 'https://shorturl.at/ghtu4', 1, 7);
-INSERT INTO products (name, description, price, image_url, id_category, stock) VALUES('LED Desk Lamp', 'Adjustable LED desk lamp with USB port', 45, 'https://shorturl.at/ghtu4', 2, 34);
+
+-- Deportes
+INSERT INTO products (name, description, price, image_url, id_category, stock) VALUES('Raqueta', 'Raqueta profesional', 199, 'https://shorturl.at/ghtu4', 2, 20);
+INSERT INTO products (name, description, price, image_url, id_category, stock) VALUES('Balon', 'Balon firmando por Messi', 24, 'https://shorturl.at/ghtu4', 2, 70);
+INSERT INTO products (name, description, price, image_url, id_category, stock) VALUES('Gafas natación', 'Gafas geniales', 99, 'https://shorturl.at/ghtu4', 2, 40);
+INSERT INTO products (name, description, price, image_url, id_category, stock) VALUES('Bate', 'Esos que dicen Tony Armas', 45, 'https://shorturl.at/ghtu4', 2, 34);
+
+-- Belleza
+INSERT INTO products (name, description, price, image_url, id_category, stock) VALUES('Mascarilla', 'Bonita y fresca', 120, 'https://shorturl.at/ghtu4', 3, 15);
+INSERT INTO products (name, description, price, image_url, id_category, stock) VALUES('Crema facial', 'Previene arrugas', 150, 'https://shorturl.at/ghtu4', 3, 10);
+INSERT INTO products (name, description, price, image_url, id_category, stock) VALUES('Lentes de contacto', 'Expresivos color café', 200, 'https://shorturl.at/ghtu4', 3, 12);
+
+-- Droguería
+INSERT INTO products (name, description, price, image_url, id_category, stock) VALUES('Pasta para el dolor de cabeza', 'Pasta grande 1 cada 8 horas', 250, 'https://shorturl.at/ghtu4', 4, 40);
+INSERT INTO products (name, description, price, image_url, id_category, stock) VALUES('Pasta para el dolor de estomago', 'Pasta mediana 1 cada 8 horas', 120, 'https://shorturl.at/ghtu4', 4, 15);
+INSERT INTO products (name, description, price, image_url, id_category, stock) VALUES('Pasta para el dolor muscular', 'Pasta pequeña 1 cada 8 horas', 160, 'https://shorturl.at/ghtu4', 4, 28);
+
+-- Mercado
+INSERT INTO products (name, description, price, image_url, id_category, stock) VALUES('Pera', 'Delicioso y fresco', 400, 'https://shorturl.at/ghtu4', 5, 25);
+INSERT INTO products (name, description, price, image_url, id_category, stock) VALUES('Mango', 'Bueno y fresco', 85, 'https://shorturl.at/ghtu4', 5, 8);
+INSERT INTO products (name, description, price, image_url, id_category, stock) VALUES('Fresa', 'Grande y fresco', 299, 'https://shorturl.at/ghtu4', 5, 15);
+
+-- Electrodomésticos
+INSERT INTO products (name, description, price, image_url, id_category, stock) VALUES('Lavadora', 'Lavadora de 10 lbs', 34, 'https://shorturl.at/ghtu4', 1, 50);
+INSERT INTO products (name, description, price, image_url, id_category, stock) VALUES('Licuadora', 'Licuadora de 2 litros', 250, 'https://shorturl.at/ghtu4', 1, 7);
 
 --INSERT USERS
 INSERT INTO users ("name", email, "password", shipping_address, id_profile) VALUES('Carlos', 'carlos@carlos.com', '123XXX', 'Call 1 # 2-3', 1);

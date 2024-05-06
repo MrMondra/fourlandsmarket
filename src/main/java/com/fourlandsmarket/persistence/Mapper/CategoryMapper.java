@@ -1,6 +1,6 @@
 package com.fourlandsmarket.persistence.Mapper;
 
-import com.fourlandsmarket.domain.Category;
+import com.fourlandsmarket.domain.dto.Category;
 import com.fourlandsmarket.persistence.entity.CategoryEntity;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;

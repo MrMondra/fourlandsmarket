@@ -1,6 +1,6 @@
 package com.fourlandsmarket.web.controller;
 
-import com.fourlandsmarket.domain.Product;
+import com.fourlandsmarket.domain.dto.Product;
 import com.fourlandsmarket.domain.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
