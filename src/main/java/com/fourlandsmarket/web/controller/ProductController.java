@@ -31,8 +31,8 @@ public class ProductController {
                 orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @GetMapping("/category/{categoryId}")
-    public ResponseEntity<List<Product>> getByCategory(Integer idCategoria) {
+    @GetMapping("/category/{idCategoria}")
+    public ResponseEntity<List<Product>> getByCategory(@PathVariable Integer idCategoria) {
         return productService.getByCategory(idCategoria).
                 map(products -> new ResponseEntity<>(products, HttpStatus.OK)).
                 orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));

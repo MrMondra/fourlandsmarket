@@ -18,7 +18,7 @@ public class ProductEntity {
     private Integer idProduct;
 
     @ManyToOne
-    @JoinColumn(name = "id_category", insertable = false, updatable = false)
+    @JoinColumn(name = "id_category", updatable = false)
     private CategoryEntity categoryEntity;
 
     //good
