@@ -1,6 +1,6 @@
 package com.fourlandsmarket.domain.repository;
 
-import com.fourlandsmarket.domain.Product;
+import com.fourlandsmarket.domain.dto.Product;
 
 import java.util.List;
 import java.util.Optional;
