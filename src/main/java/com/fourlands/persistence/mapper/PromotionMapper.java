@@ -1,4 +1,4 @@
-package com.fourlandsmarket.persistence.Mapper;
+package com.fourlandsmarket.persistence.mapper;
 
 
 import com.fourlandsmarket.domain.dto.Promotion;
