@@ -1,7 +1,7 @@
-package com.fourlandsmarket.domain.service;
+package com.fourlands.domain.service;
 
-import com.fourlandsmarket.domain.dto.Promotion;
-import com.fourlandsmarket.domain.repository.PromotionRepository;
+import com.fourlands.domain.dto.Promotion;
+import com.fourlands.domain.repository.PromotionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

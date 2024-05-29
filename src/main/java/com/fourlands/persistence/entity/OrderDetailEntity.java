@@ -1,4 +1,4 @@
-package com.fourlandsmarket.persistence.entity;
+package com.fourlands.persistence.entity;
 
 
 import jakarta.persistence.*;

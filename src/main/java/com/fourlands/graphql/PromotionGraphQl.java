@@ -1,9 +1,9 @@
-package com.fourlandsmarket.graphql;
+package com.fourlands.graphql;
 
-import com.fourlandsmarket.domain.dto.Product;
-import com.fourlandsmarket.domain.dto.Promotion;
-import com.fourlandsmarket.domain.service.ProductService;
-import com.fourlandsmarket.domain.service.PromotionService;
+import com.fourlands.domain.dto.Product;
+import com.fourlands.domain.dto.Promotion;
+import com.fourlands.domain.service.ProductService;
+import com.fourlands.domain.service.PromotionService;
 import graphql.kickstart.tools.GraphQLQueryResolver;
 import lombok.Getter;
 import lombok.Setter;

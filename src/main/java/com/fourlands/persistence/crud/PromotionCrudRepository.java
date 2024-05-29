@@ -1,6 +1,6 @@
-package com.fourlandsmarket.persistence.crud;
+package com.fourlands.persistence.crud;
 
-import com.fourlandsmarket.persistence.entity.PromotionEntity;
+import com.fourlands.persistence.entity.PromotionEntity;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

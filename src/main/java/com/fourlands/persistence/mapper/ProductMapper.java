@@ -1,7 +1,7 @@
-package com.fourlandsmarket.persistence.mapper;
+package com.fourlands.persistence.mapper;
 
-import com.fourlandsmarket.domain.dto.Product;
-import com.fourlandsmarket.persistence.entity.ProductEntity;
+import com.fourlands.domain.dto.Product;
+import com.fourlands.persistence.entity.ProductEntity;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

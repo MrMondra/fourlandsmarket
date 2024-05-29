@@ -58,6 +58,15 @@ jobs:
       # Compile the project using Gradle
       - name: Build with Gradle
         run: ./gradlew build --info
+        env:
+          #Tenant Viva
+          SPRING_DATASOURCE_URL_VIVA: ${{ secrets.SPRING_DATASOURCE_URL_VIVA }}
+          SPRING_DATASOURCE_USERNAME_VIVA: ${{ secrets.SPRING_DATASOURCE_USERNAME_VIVA }}
+          SPRING_DATASOURCE_PASSWORD_VIVA: ${{ secrets.SPRING_DATASOURCE_PASSWORD_VIVA }}
+          #Tenant Casa
+          SPRING_DATASOURCE_URL_CASA: ${{ secrets.SPRING_DATASOURCE_URL_CASA }}
+          SPRING_DATASOURCE_USERNAME_CASA: ${{ secrets.SPRING_DATASOURCE_USERNAME_CASA }}
+          SPRING_DATASOURCE_PASSWORD_CASA: ${{ secrets.SPRING_DATASOURCE_PASSWORD_CASA }}
 
       # Configure Docker Buildx for building Docker images
       - name: Set up Docker Buildx

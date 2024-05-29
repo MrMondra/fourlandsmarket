@@ -1,7 +1,7 @@
-package com.fourlandsmarket.domain.service;
+package com.fourlands.domain.service;
 
-import com.fourlandsmarket.domain.dto.Product;
-import com.fourlandsmarket.domain.repository.ProductRepository;
+import com.fourlands.domain.dto.Product;
+import com.fourlands.domain.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,7 +33,7 @@ public class ProductService {
     public Product save(Product product) {
         return productRepository.save(product);
     }
-    
+
     @Transactional(readOnly = true)
     public boolean delete(Integer idProduct) {
         /*return getProduct(idProduct).map(product -> {

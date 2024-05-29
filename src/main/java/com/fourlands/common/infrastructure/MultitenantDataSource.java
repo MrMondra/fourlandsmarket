@@ -1,2 +1,10 @@
-package com.fourlands.common.infrastructure;public class MultitenantDataSource {
+package com.fourlands.common.infrastructure;
+
+import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
+
+public class MultitenantDataSource extends AbstractRoutingDataSource {
+    @Override
+    protected String determineCurrentLookupKey() {
+        return TenantContext.getCurrentTenant();
+    }
 }

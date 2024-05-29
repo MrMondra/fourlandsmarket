@@ -1,7 +1,7 @@
-package com.fourlandsmarket.web.controller;
+package com.fourlands.web.controller;
 
-import com.fourlandsmarket.domain.dto.Promotion;
-import com.fourlandsmarket.domain.service.PromotionService;
+import com.fourlands.domain.dto.Promotion;
+import com.fourlands.domain.service.PromotionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

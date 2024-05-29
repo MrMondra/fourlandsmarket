@@ -1,10 +1,10 @@
-package com.fourlandsmarket.persistence;
+package com.fourlands.persistence;
 
-import com.fourlandsmarket.domain.dto.Promotion;
-import com.fourlandsmarket.domain.repository.PromotionRepository;
-import com.fourlandsmarket.persistence.crud.PromotionCrudRepository;
-import com.fourlandsmarket.persistence.entity.PromotionEntity;
-import com.fourlandsmarket.persistence.mapper.PromotionMapper;
+import com.fourlands.domain.dto.Promotion;
+import com.fourlands.domain.repository.PromotionRepository;
+import com.fourlands.persistence.crud.PromotionCrudRepository;
+import com.fourlands.persistence.entity.PromotionEntity;
+import com.fourlands.persistence.mapper.PromotionMapper;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;

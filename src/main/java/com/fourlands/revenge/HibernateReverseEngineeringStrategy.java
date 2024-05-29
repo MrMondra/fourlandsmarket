@@ -1,4 +1,4 @@
-package com.fourlandsmarket.revenge;
+package com.fourlands.revenge;
 
 import org.hibernate.cfg.reveng.DelegatingReverseEngineeringStrategy;
 import org.hibernate.cfg.reveng.ReverseEngineeringStrategy;
@@ -8,6 +8,7 @@ import java.util.List;
 
 public class HibernateReverseEngineeringStrategy extends DelegatingReverseEngineeringStrategy {
 
+    private static final String TARGET_PACKAGE = "com.fourlands.persistence.entity";
 
     public HibernateReverseEngineeringStrategy(ReverseEngineeringStrategy delegate) {
         super(delegate);
@@ -17,7 +18,7 @@ public class HibernateReverseEngineeringStrategy extends DelegatingReverseEngine
     public String tableToClassName(TableIdentifier tableIdentifier) {
         // Convertir nombres de tabla en snake_case a CamelCase y añadir 'Entity'
         String tableName = tableIdentifier.getName();
-        return toCamelCase(tableName) + "Entity";
+        return TARGET_PACKAGE + "." + toCamelCase(tableName) + "Entity";
     }
 
     @Override

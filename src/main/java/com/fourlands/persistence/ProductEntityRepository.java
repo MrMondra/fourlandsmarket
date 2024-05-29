@@ -1,10 +1,10 @@
-package com.fourlandsmarket.persistence;
+package com.fourlands.persistence;
 
-import com.fourlandsmarket.domain.dto.Product;
-import com.fourlandsmarket.domain.repository.ProductRepository;
-import com.fourlandsmarket.persistence.crud.ProductCrudRepository;
-import com.fourlandsmarket.persistence.entity.ProductEntity;
-import com.fourlandsmarket.persistence.mapper.ProductMapper;
+import com.fourlands.domain.dto.Product;
+import com.fourlands.domain.repository.ProductRepository;
+import com.fourlands.persistence.crud.ProductCrudRepository;
+import com.fourlands.persistence.entity.ProductEntity;
+import com.fourlands.persistence.mapper.ProductMapper;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;

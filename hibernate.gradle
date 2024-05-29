@@ -1,0 +1,43 @@
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+}
+
+configurations {
+    hibernate
+}
+
+dependencies {
+    // Hibernate Tools y dependencias
+    implementation 'org.hibernate:hibernate-tools:5.6.15.Final'
+    hibernate 'org.hibernate:hibernate-tools:5.6.15.Final'
+    hibernate 'org.hibernate:hibernate-core:5.6.15.Final'
+    hibernate 'org.postgresql:postgresql:42.2.23'  // Especifica la versión del driver PostgreSQL
+}
+
+project.ext {
+    hibernateDestDir = file("$projectDir/src/main/java")
+}
+
+task generateJPAEntities {
+    doLast {
+        ant.taskdef(
+                name: 'hibernatetool',
+                classname: 'org.hibernate.tool.ant.HibernateToolTask',
+                classpath: configurations.hibernate.asPath
+        )
+
+        ant.hibernatetool(destdir: 'src/main/java/com/fourlands/persistence/generate/entity') {
+            classpath {
+                pathelement(path: "$buildDir/classes/java/main")
+            }
+            jdbcconfiguration(
+                    propertyFile: "$projectDir/src/main/resources/hibernate.properties",
+                    revengFile: "$projectDir/src/main/resources/hibernate.reveng.xml",
+                    reversestrategy: "com.fourlands.revenge.HibernateReverseEngineeringStrategy"
+            )
+            hbm2java(jdk5: 'true', ejb3: 'true')
+        }
+    }
+}

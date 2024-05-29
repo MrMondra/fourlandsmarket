@@ -1,13 +1,13 @@
-package com.fourlandsmarket;
+package com.fourlands;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class FourlandsMarketApplication {
+public class FourlandsApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(FourlandsMarketApplication.class, args);
+        SpringApplication.run(FourlandsApplication.class, args);
     }
-    
+
 }

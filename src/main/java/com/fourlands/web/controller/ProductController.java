@@ -1,20 +1,27 @@
-package com.fourlandsmarket.web.controller;
+package com.fourlands.web.controller;
 
-import com.fourlandsmarket.domain.dto.Product;
-import com.fourlandsmarket.domain.service.ProductService;
+import com.fourlands.common.infrastructure.TenantContext;
+import com.fourlands.domain.dto.Product;
+import com.fourlands.domain.service.ProductService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 @RestController
+@Transactional
 @RequestMapping("/products")
 public class ProductController {
 
+    private static final Logger LOGGER = Logger.getLogger(ProductController.class.getName());
+
     @Autowired
     private ProductService productService;
+
 
     @GetMapping("/getall")
     public ResponseEntity<List<Product>> getAll() {
@@ -33,6 +40,8 @@ public class ProductController {
 
     @GetMapping("/category/{idCategoria}")
     public ResponseEntity<List<Product>> getByCategory(@PathVariable Integer idCategoria) {
+        String currentTenant = TenantContext.getCurrentTenant();
+        LOGGER.info("Handling request for tenant: " + currentTenant);
         return productService.getByCategory(idCategoria).
                 map(products -> new ResponseEntity<>(products, HttpStatus.OK)).
                 orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
