@@ -28,7 +28,8 @@ public class HibernateReverseEngineeringStrategy extends DelegatingReverseEngine
     }
 
     @Override
-    public String foreignKeyToEntityName(String keyname, TableIdentifier fromTable, List<?> fromColumns, TableIdentifier referencedTable, List<?> referencedColumns, boolean uniqueReference) {
+    public String foreignKeyToEntityName(String keyname, TableIdentifier fromTable, List<?> fromColumns, TableIdentifier referencedTable,
+                                         List<?> referencedColumns, boolean uniqueReference) {
         // Personalización para el nombre de la entidad basado en la clave foránea
         return "FK" + super.foreignKeyToEntityName(keyname, fromTable, fromColumns, referencedTable, referencedColumns, uniqueReference);
     }
