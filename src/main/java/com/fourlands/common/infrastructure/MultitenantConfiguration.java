@@ -39,9 +39,9 @@ public class MultitenantConfiguration {
                 String passwordEnv = System.getenv(tenantProperties.getProperty("datasource.password"));
                 String urlEnv = System.getenv(tenantProperties.getProperty("datasource.url"));
                 dataSourceBuilder.driverClassName(tenantProperties.getProperty("datasource.driver-class-name"));
-                dataSourceBuilder.username(System.getenv(tenantProperties.getProperty("datasource.username")));
-                dataSourceBuilder.password(System.getenv(tenantProperties.getProperty("datasource.password")));
-                dataSourceBuilder.url(System.getenv(tenantProperties.getProperty("datasource.url")));
+                dataSourceBuilder.username(usernameEnv);
+                dataSourceBuilder.password(passwordEnv);
+                dataSourceBuilder.url(urlEnv);
 
                 LOGGER.info("Configuring datasource for tenant: " + tenantId);
                 LOGGER.info("Using environment variables: " + usernameEnv + ", " + passwordEnv + ", " + urlEnv);
