@@ -35,10 +35,16 @@ public class MultitenantConfiguration {
             try {
                 tenantProperties.load(new FileInputStream(propertyFile));
                 String tenantId = tenantProperties.getProperty("name");
+                String usernameEnv = System.getenv(tenantProperties.getProperty("datasource.username"));
+                String passwordEnv = System.getenv(tenantProperties.getProperty("datasource.password"));
+                String urlEnv = System.getenv(tenantProperties.getProperty("datasource.url"));
                 dataSourceBuilder.driverClassName(tenantProperties.getProperty("datasource.driver-class-name"));
                 dataSourceBuilder.username(System.getenv(tenantProperties.getProperty("datasource.username")));
                 dataSourceBuilder.password(System.getenv(tenantProperties.getProperty("datasource.password")));
                 dataSourceBuilder.url(System.getenv(tenantProperties.getProperty("datasource.url")));
+
+                LOGGER.info("Configuring datasource for tenant: " + tenantId);
+                LOGGER.info("Using environment variables: " + usernameEnv + ", " + passwordEnv + ", " + urlEnv);
 
                 resolvedDataSources.put(tenantId, dataSourceBuilder.build());
 
