@@ -22,6 +22,9 @@ public class MultitenantConfiguration {
     @Value("${defaultTenant}")
     private String defaultTenant;
 
+    @Value("${isRunLocal}")
+    private boolean isRunLocal;
+
     private static final Logger LOGGER = Logger.getLogger(MultitenantConfiguration.class.getName());
 
     @Bean
@@ -46,7 +49,10 @@ public class MultitenantConfiguration {
                 LOGGER.info("Configuring datasource for tenant: " + tenantId);
                 LOGGER.info("Using environment variables: " + usernameEnv + ", " + passwordEnv + ", " + urlEnv);
 
-                resolvedDataSources.put(tenantId, dataSourceBuilder.build());
+                if (isRunLocal && tenantId.equals("tenant_local"))
+                    resolvedDataSources.put(tenantId, dataSourceBuilder.build());
+                if (!isRunLocal && !tenantId.equals("tenant_local"))
+                    resolvedDataSources.put(tenantId, dataSourceBuilder.build());
 
             } catch (IOException exp) {
                 throw new RuntimeException("Problem in tenant datasource:" + exp);

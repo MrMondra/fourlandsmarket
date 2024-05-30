@@ -55,24 +55,6 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x ./gradlew
 
-      - name: Verify environment variables
-        env:
-          # Tenant Viva
-          SPRING_DATASOURCE_URL_VIVA: ${{ secrets.SPRING_DATASOURCE_URL_VIVA }}
-          SPRING_DATASOURCE_USERNAME_VIVA: ${{ secrets.SPRING_DATASOURCE_USERNAME_VIVA }}
-          SPRING_DATASOURCE_PASSWORD_VIVA: ${{ secrets.SPRING_DATASOURCE_PASSWORD_VIVA }}
-          # Tenant Casa
-          SPRING_DATASOURCE_URL_CASA: ${{ secrets.SPRING_DATASOURCE_URL_CASA }}
-          SPRING_DATASOURCE_USERNAME_CASA: ${{ secrets.SPRING_DATASOURCE_USERNAME_CASA }}
-          SPRING_DATASOURCE_PASSWORD_CASA: ${{ secrets.SPRING_DATASOURCE_PASSWORD_CASA }}
-        run: |
-          echo "SPRING_DATASOURCE_URL_VIVA=${{ env.SPRING_DATASOURCE_URL_VIVA }}"
-          echo "SPRING_DATASOURCE_USERNAME_VIVA=${{ env.SPRING_DATASOURCE_USERNAME_VIVA }}"
-          echo "SPRING_DATASOURCE_PASSWORD_VIVA=${{ env.SPRING_DATASOURCE_PASSWORD_VIVA }}"
-          echo "SPRING_DATASOURCE_URL_CASA=${{ env.SPRING_DATASOURCE_URL_CASA }}"
-          echo "SPRING_DATASOURCE_USERNAME_CASA=${{ env.SPRING_DATASOURCE_USERNAME_CASA }}"
-          echo "SPRING_DATASOURCE_PASSWORD_CASA=${{ env.SPRING_DATASOURCE_PASSWORD_CASA }}"
-
       # Compile the project using Gradle
       - name: Build with Gradle
         env:
