@@ -1,10 +1,15 @@
 package com.fourlands.common.infrastructure;
 
+import jakarta.persistence.EntityManagerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
 import java.io.File;
@@ -27,10 +32,12 @@ public class MultitenantConfiguration {
 
     private static final Logger LOGGER = Logger.getLogger(MultitenantConfiguration.class.getName());
 
+    private Map<Object, Object> resolvedDataSources = new HashMap<>();
+    private Map<String, Properties> tenantPropertiesMap = new HashMap<>();
+
     @Bean
     public DataSource dataSource() {
         File[] files = Paths.get("src/main/resources/allTenants").toFile().listFiles();
-        Map<Object, Object> resolvedDataSources = new HashMap<>();
 
         for (File propertyFile : files) {
             Properties tenantProperties = new Properties();
@@ -54,6 +61,8 @@ public class MultitenantConfiguration {
                 if (!isRunLocal && !tenantId.equals("tenant_local"))
                     resolvedDataSources.put(tenantId, dataSourceBuilder.build());
 
+                tenantPropertiesMap.put(tenantId, tenantProperties);
+
             } catch (IOException exp) {
                 throw new RuntimeException("Problem in tenant datasource:" + exp);
             }
@@ -65,6 +74,36 @@ public class MultitenantConfiguration {
 
         dataSource.afterPropertiesSet();
         return dataSource;
+    }
+
+    @Bean
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
+        LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
+        em.setDataSource(dataSource);
+        em.setPackagesToScan("com.fourlands.persistence.entity"); // Paquete donde están tus entidades JPA
+
+        HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+        em.setJpaVendorAdapter(vendorAdapter);
+
+        // Configuración específica para cada tenant
+        em.setJpaPropertyMap(getJpaPropertiesForTenant(defaultTenant));
+
+        return em;
+    }
+
+    private Map<String, Object> getJpaPropertiesForTenant(String tenantId) {
+        Properties tenantProperties = tenantPropertiesMap.get(tenantId);
+        Map<String, Object> jpaProperties = new HashMap<>();
+        jpaProperties.put("hibernate.hbm2ddl.auto", "none");
+        jpaProperties.put("hibernate.dialect", tenantProperties.getProperty("hibernate.dialect"));
+        return jpaProperties;
+    }
+
+    @Bean
+    public PlatformTransactionManager transactionManager(EntityManagerFactory emf) {
+        JpaTransactionManager transactionManager = new JpaTransactionManager();
+        transactionManager.setEntityManagerFactory(emf);
+        return transactionManager;
     }
 
 
