@@ -96,8 +96,7 @@ public class MultitenantConfiguration {
         LOGGER.info("tenantId for search: " + tenantId);
         LOGGER.info(tenantPropertiesMap != null ? "existe MAP" : "not exist MAP");
         Properties tenantProperties = tenantPropertiesMap.get(tenantId);
-        LOGGER.info("tenant_viva as object-> " + tenantProperties.get("tenant_viva").toString());
-        LOGGER.info("tenant_viva as propertie-> " + tenantProperties.getProperty("tenant_viva").toString());
+        LOGGER.info(tenantProperties != null ? "existe propertie" : "not exist propertie");
         Map<String, Object> jpaProperties = new HashMap<>();
         jpaProperties.put("hibernate.hbm2ddl.auto", "none");
         jpaProperties.put("hibernate.dialect", tenantProperties.getProperty("hibernate.dialect"));
