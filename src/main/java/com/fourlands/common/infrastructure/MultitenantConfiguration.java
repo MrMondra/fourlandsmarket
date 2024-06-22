@@ -38,7 +38,8 @@ public class MultitenantConfiguration {
     @Bean
     public DataSource dataSource() {
         File[] files = Paths.get("src/main/resources/allTenants").toFile().listFiles();
-
+        LOGGER.info("File name: " + files[0].getName());
+        LOGGER.info("File name: " + files[1].getName());
         for (File propertyFile : files) {
             Properties tenantProperties = new Properties();
             DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
