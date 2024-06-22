@@ -93,6 +93,8 @@ public class MultitenantConfiguration {
     }
 
     private Map<String, Object> getJpaPropertiesForTenant(String tenantId) {
+        LOGGER.info("tenantId for search: " + tenantId);
+        LOGGER.info(tenantPropertiesMap != null ? "existe MAP" : "not exist MAP");
         Properties tenantProperties = tenantPropertiesMap.get(tenantId);
         Map<String, Object> jpaProperties = new HashMap<>();
         jpaProperties.put("hibernate.hbm2ddl.auto", "none");
