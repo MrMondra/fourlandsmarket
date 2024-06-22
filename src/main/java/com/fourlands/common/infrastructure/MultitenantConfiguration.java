@@ -33,7 +33,15 @@ public class MultitenantConfiguration {
     private static final Logger LOGGER = Logger.getLogger(MultitenantConfiguration.class.getName());
 
     private Map<Object, Object> resolvedDataSources = new HashMap<>();
-    private Map<String, Properties> tenantPropertiesMap = new HashMap<>();
+    private static Map<String, Properties> tenantPropertiesMap;
+
+    // Método para obtener la instancia singleton de tenantPropertiesMap
+    private static synchronized Map<String, Properties> getTenantPropertiesMap() {
+        if (tenantPropertiesMap == null) {
+            tenantPropertiesMap = new HashMap<>();
+        }
+        return tenantPropertiesMap;
+    }
 
     @Bean
     public DataSource dataSource() {
@@ -62,7 +70,7 @@ public class MultitenantConfiguration {
                 if (!isRunLocal && !tenantId.equals("tenant_local"))
                     resolvedDataSources.put(tenantId, dataSourceBuilder.build());
 
-                tenantPropertiesMap.put(tenantId, tenantProperties);
+                getTenantPropertiesMap().put(tenantId, tenantProperties);
 
             } catch (IOException exp) {
                 throw new RuntimeException("Problem in tenant datasource:" + exp);
@@ -93,10 +101,7 @@ public class MultitenantConfiguration {
     }
 
     private Map<String, Object> getJpaPropertiesForTenant(String tenantId) {
-        LOGGER.info("tenantId for search: " + tenantId);
-        LOGGER.info(tenantPropertiesMap != null ? "existe MAP" : "not exist MAP");
-        Properties tenantProperties = tenantPropertiesMap.get(tenantId);
-        LOGGER.info(tenantProperties != null ? "existe propertie" : "not exist propertie");
+        Properties tenantProperties = getTenantPropertiesMap().get(tenantId);
         Map<String, Object> jpaProperties = new HashMap<>();
         jpaProperties.put("hibernate.hbm2ddl.auto", "none");
         jpaProperties.put("hibernate.dialect", tenantProperties.getProperty("hibernate.dialect"));
