@@ -1,6 +1,7 @@
 package com.fourlands.common.infrastructure;
 
 import jakarta.persistence.EntityManagerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
@@ -34,6 +35,7 @@ public class MultitenantConfiguration {
 
     private Map<Object, Object> resolvedDataSources = new HashMap<>();
 
+    @Autowired
     private Map<String, Properties> tenantPropertiesMap = new HashMap<>();
 
     @Bean
