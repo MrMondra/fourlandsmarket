@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -16,7 +18,6 @@ import javax.sql.DataSource;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -38,9 +39,22 @@ public class MultitenantConfiguration {
     @Autowired
     private Map<String, Properties> tenantPropertiesMap = new HashMap<>();
 
+    @Autowired
+    private ResourceLoader resourceLoader;
+
     @Bean
     public DataSource dataSource() {
-        File[] files = Paths.get("src/main/resources/allTenants").toFile().listFiles();
+        Resource resource = resourceLoader.getResource("classpath:allTenants");
+        File dir;
+
+        try {
+            dir = resource.getFile();
+        } catch (IOException e) {
+            LOGGER.severe("Directory src/main/resources/allTenants does not exist or is not accessible.");
+            throw new RuntimeException("Directory src/main/resources/allTenants does not exist or is not accessible.");
+        }
+
+        File[] files = dir.listFiles();
         LOGGER.info("File name: " + files[0].getName());
         LOGGER.info("File name: " + files[1].getName());
         for (File propertyFile : files) {
