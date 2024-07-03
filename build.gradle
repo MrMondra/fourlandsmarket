@@ -59,3 +59,13 @@ bootJar {
     archiveBaseName = 'fourlands'
     destinationDirectory = file("$projectDir/target")  // Usar projectDir para un path relativo
 }
+tasks.processResources {
+    // Incluir archivos adicionales
+    from('src/main/resources/allTenants') {
+        include '**/*.properties'
+        into 'allTenants'
+    }
+
+    // Manejar duplicados
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}

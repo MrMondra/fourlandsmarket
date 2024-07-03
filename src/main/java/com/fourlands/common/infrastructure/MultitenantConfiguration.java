@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -15,9 +16,8 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -44,24 +44,20 @@ public class MultitenantConfiguration {
 
     @Bean
     public DataSource dataSource() {
-        Resource resource = resourceLoader.getResource("classpath:allTenants");
-        File dir;
-
+        Resource[] resources;
         try {
-            dir = resource.getFile();
+            PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver(resourceLoader);
+            resources = resolver.getResources("classpath:allTenants/*.properties");
         } catch (IOException e) {
-            LOGGER.severe("Directory src/main/resources/allTenants does not exist or is not accessible.");
-            throw new RuntimeException("Directory src/main/resources/allTenants does not exist or is not accessible.");
+            LOGGER.severe("Could not load resources from classpath:allTenants/*.properties.");
+            throw new RuntimeException("Could not load resources from classpath:allTenants/*.properties.", e);
         }
 
-        File[] files = dir.listFiles();
-        LOGGER.info("File name: " + files[0].getName());
-        LOGGER.info("File name: " + files[1].getName());
-        for (File propertyFile : files) {
+        for (Resource resource : resources) {
             Properties tenantProperties = new Properties();
             DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
-            try {
-                tenantProperties.load(new FileInputStream(propertyFile));
+            try (InputStream inputStream = resource.getInputStream()) {
+                tenantProperties.load(inputStream);
                 String tenantId = tenantProperties.getProperty("name");
                 String usernameEnv = System.getenv(tenantProperties.getProperty("datasource.username"));
                 String passwordEnv = System.getenv(tenantProperties.getProperty("datasource.password"));
