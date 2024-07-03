@@ -22,5 +22,6 @@ type Promotion {
 }
 
 type Query {
-    allPromotions: [Promotion]
+    allPromotions: [Promotion],
+    getProductByCategory(idCategory: Int!): [Product]
 }

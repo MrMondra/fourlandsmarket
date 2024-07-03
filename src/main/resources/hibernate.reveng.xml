@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC
+        "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN"
+        "src/main/resources/others/hibernate-reverse-engineering-3.0.dtd">
+<hibernate-reverse-engineering>
+    <schema-selection match-schema="public"/>
+
+    <!-- Tabla users -->
+    <table name="users">
+        <primary-key>
+            <key-column name="id_user"/>
+        </primary-key>
+    </table>
+
+    <!-- Tabla profiles -->
+    <table name="profiles">
+        <primary-key>
+            <key-column name="id_profile"/>
+        </primary-key>
+    </table>
+
+    <!-- Tabla user_session -->
+    <table name="user_session">
+        <primary-key>
+            <key-column name="id_session"/>
+        </primary-key>
+        <foreign-key foreign-table="users">
+            <column-ref local-column="id_user" foreign-column="id_user"/>
+            <many-to-one property="user"/>
+        </foreign-key>
+    </table>
+
+    <!-- Tabla orders -->
+    <table name="orders">
+        <primary-key>
+            <key-column name="id_order"/>
+        </primary-key>
+        <foreign-key foreign-table="users">
+            <column-ref local-column="id_user" foreign-column="id_user"/>
+            <many-to-one property="user"/>
+        </foreign-key>
+    </table>
+
+    <!-- Tabla order_details -->
+    <table name="order_details">
+        <primary-key>
+            <key-column name="id_order_detail"/>
+        </primary-key>
+        <foreign-key foreign-table="orders">
+            <column-ref local-column="id_order" foreign-column="id_order"/>
+            <many-to-one property="order"/>
+        </foreign-key>
+        <foreign-key foreign-table="products">
+            <column-ref local-column="id_product" foreign-column="id_product"/>
+            <many-to-one property="product"/>
+        </foreign-key>
+    </table>
+
+    <!-- Tabla products -->
+    <table name="products">
+        <primary-key>
+            <key-column name="id_product"/>
+        </primary-key>
+    </table>
+
+    <!-- Tabla reviews -->
+    <table name="reviews">
+        <primary-key>
+            <key-column name="id_review"/>
+        </primary-key>
+        <foreign-key foreign-table="users">
+            <column-ref local-column="id_user" foreign-column="id_user"/>
+            <many-to-one property="user"/>
+        </foreign-key>
+        <foreign-key foreign-table="products">
+            <column-ref local-column="id_product" foreign-column="id_product"/>
+            <many-to-one property="product"/>
+        </foreign-key>
+    </table>
+
+    <!-- Tabla categories -->
+    <table name="categories">
+        <primary-key>
+            <key-column name="id_category"/>
+        </primary-key>
+    </table>
+
+    <!-- Tabla promotions -->
+    <table name="promotions">
+        <primary-key>
+            <key-column name="id_promotion"/>
+        </primary-key>
+    </table>
+
+    <!-- Tabla product_promotions -->
+    <table name="product_promotions">
+        <primary-key>
+            <key-column name="id_promotion"/>
+            <key-column name="id_product"/>
+        </primary-key>
+        <foreign-key foreign-table="promotions">
+            <column-ref local-column="id_promotion" foreign-column="id_promotion"/>
+            <many-to-one property="promotion"/>
+        </foreign-key>
+        <foreign-key foreign-table="products">
+            <column-ref local-column="id_product" foreign-column="id_product"/>
+            <many-to-one property="product"/>
+        </foreign-key>
+    </table>
+
+    <!-- Tabla category_promotions -->
+    <table name="category_promotions">
+        <primary-key>
+            <key-column name="id_promotion"/>
+            <key-column name="id_category"/>
+        </primary-key>
+        <foreign-key foreign-table="promotions">
+            <column-ref local-column="id_promotion" foreign-column="id_promotion"/>
+            <many-to-one property="promotion"/>
+        </foreign-key>
+        <foreign-key foreign-table="categories">
+            <column-ref local-column="id_category" foreign-column="id_category"/>
+            <many-to-one property="category"/>
+        </foreign-key>
+    </table>
+
+</hibernate-reverse-engineering>

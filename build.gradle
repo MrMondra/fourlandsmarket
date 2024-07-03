@@ -23,27 +23,29 @@ dependencies {
     // Spring Boot dependencies
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.projectlombok:lombok'
     implementation 'org.mapstruct:mapstruct:1.5.5.Final'
 
     //Graphql
-    implementation 'com.graphql-java-kickstart:graphql-java-tools:13.1.1'
     implementation 'com.graphql-java-kickstart:graphql-spring-boot-starter:15.1.0'
-    implementation 'com.graphql-java-kickstart:graphql-java-servlet:15.2.0'
-    implementation 'com.graphql-java-kickstart:graphiql-spring-boot-starter:11.1.0'
-
+    implementation 'com.graphql-java-kickstart:graphql-java-tools:13.1.1'
+    implementation 'com.graphql-java:graphql-java:21.3'
 
     //Map Struct with lombok
-    annotationProcessor("org.projectlombok:lombok")
+    annotationProcessor 'org.projectlombok:lombok:1.18.30'
+    compileOnly 'org.projectlombok:lombok:1.18.30'
+    annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
 
     // Testing dependencies
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.mockito:mockito-core:4.2.0'  // Añade Mockito
-    testImplementation 'org.mockito:mockito-junit-jupiter:4.2.0' // Integración de Mockito con JUnit Jupiter
+    testImplementation 'org.mockito:mockito-core:4.2.0'
+    testImplementation 'org.mockito:mockito-junit-jupiter:4.2.0'
 
+    // Necesary for reverse engineering
+    compileOnly 'org.hibernate:hibernate-tools:5.6.15.Final'
 
     runtimeOnly 'org.postgresql:postgresql'
+
 }
 // Configuración de Checkstyle
 checkstyle {
@@ -56,4 +58,14 @@ tasks.named('test') {
 bootJar {
     archiveBaseName = 'fourlands'
     destinationDirectory = file("$projectDir/target")  // Usar projectDir para un path relativo
+}
+tasks.processResources {
+    // Incluir archivos adicionales
+    from('src/main/resources/allTenants') {
+        include '**/*.properties'
+        into 'allTenants'
+    }
+
+    // Manejar duplicados
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }

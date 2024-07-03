@@ -57,6 +57,15 @@ jobs:
 
       # Compile the project using Gradle
       - name: Build with Gradle
+        env:
+          # Tenant Viva
+          SPRING_DATASOURCE_URL_VIVA: ${{ secrets.SPRING_DATASOURCE_URL_VIVA }}
+          SPRING_DATASOURCE_USERNAME_VIVA: ${{ secrets.SPRING_DATASOURCE_USERNAME_VIVA }}
+          SPRING_DATASOURCE_PASSWORD_VIVA: ${{ secrets.SPRING_DATASOURCE_PASSWORD_VIVA }}
+          # Tenant Casa
+          SPRING_DATASOURCE_URL_CASA: ${{ secrets.SPRING_DATASOURCE_URL_CASA }}
+          SPRING_DATASOURCE_USERNAME_CASA: ${{ secrets.SPRING_DATASOURCE_USERNAME_CASA }}
+          SPRING_DATASOURCE_PASSWORD_CASA: ${{ secrets.SPRING_DATASOURCE_PASSWORD_CASA }}
         run: ./gradlew build --info
 
       # Configure Docker Buildx for building Docker images
@@ -89,3 +98,12 @@ jobs:
           image-url: fourlandsdev/fourlandsdev:dev
           render-api-key: ${{ secrets.RENDER_API_KEY }}
           wait-for-deployment: true
+        env:
+          # Tenant Viva
+          SPRING_DATASOURCE_URL_VIVA: ${{ secrets.SPRING_DATASOURCE_URL_VIVA }}
+          SPRING_DATASOURCE_USERNAME_VIVA: ${{ secrets.SPRING_DATASOURCE_USERNAME_VIVA }}
+          SPRING_DATASOURCE_PASSWORD_VIVA: ${{ secrets.SPRING_DATASOURCE_PASSWORD_VIVA }}
+          # Tenant Casa
+          SPRING_DATASOURCE_URL_CASA: ${{ secrets.SPRING_DATASOURCE_URL_CASA }}
+          SPRING_DATASOURCE_USERNAME_CASA: ${{ secrets.SPRING_DATASOURCE_USERNAME_CASA }}
+          SPRING_DATASOURCE_PASSWORD_CASA: ${{ secrets.SPRING_DATASOURCE_PASSWORD_CASA }}
